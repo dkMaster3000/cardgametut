@@ -15,12 +15,16 @@ public class CardZoom : MonoBehaviour
 
     public void OnHoverEnter()
     {
-        zoomCard = Instantiate(gameObject, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 280), Quaternion.identity);
+        //Input.mousePosition.x, Input.mousePosition.y + 250
+        //gameObject.transform.position.x, gameObject.transform.position.y + 280
+        zoomCard = Instantiate(gameObject, new Vector2(300, 500), Quaternion.identity);
         zoomCard.transform.SetParent(Canvas.transform, false);
         zoomCard.layer = LayerMask.NameToLayer("Zoom");
 
+
         RectTransform rect = zoomCard.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(240, 344);
+
     }
 
     public void OnHoverExit()
