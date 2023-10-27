@@ -5,6 +5,7 @@ using Mirror;
 
 public class GameManager : NetworkBehaviour
 {
+    public UIManager UIManager;
     public int TurnOrder = 0;
     public string GameState = "Initialize {}";
     public int PlayerBP = 0;
@@ -18,8 +19,10 @@ public class GameManager : NetworkBehaviour
 
 
     void Start()
-    {
-       
+    { 
+        UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        UIManager.UpdatePlayerText();
+        UIManager.UpdateButtonText(GameState);
     }
 
     public void ChangeGameState(string stateRequest)
@@ -34,6 +37,7 @@ public class GameManager : NetworkBehaviour
             if(ReadyClicks == 1)
             {
                 GameState = "Compile {}";
+                UIManager.HighlightTurn(TurnOrder);
             }
 
         }   else if (stateRequest == "Execute {}")
@@ -41,6 +45,8 @@ public class GameManager : NetworkBehaviour
             GameState = "Execute {}";
             TurnOrder = 0;
         }
+
+       UIManager.UpdateButtonText(GameState);
     }
 
     public void ChangeReadyClicks()
@@ -51,7 +57,8 @@ public class GameManager : NetworkBehaviour
     public void CardPlayed()
     {
         TurnOrder++;
-        if(TurnOrder == 10) 
+        UIManager.HighlightTurn(TurnOrder);
+        if (TurnOrder == 10) 
         {
             ChangeGameState("Execute {}");
         }
