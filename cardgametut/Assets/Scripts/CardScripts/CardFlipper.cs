@@ -5,18 +5,38 @@ using UnityEngine.UI;
 
 public class CardFlipper : MonoBehaviour
 {
-    public Sprite CardFront;
-    public Sprite CardBack;
+    public Sprite CyanCardFront;
+    public Sprite CyanCardBack;
+    public Sprite MagentaCardFront;
+    public Sprite MagentaCardBack;
+
+    private Sprite cardFront;
+    private Sprite cardBack;
+
+    public void SetSprite(string type)
+    {
+        if (type == "cyan")
+        {
+            cardFront = CyanCardFront;
+            cardBack = CyanCardBack;
+
+        } else if (type == "magenta")
+        {
+            gameObject.GetComponent<Image>().sprite = MagentaCardFront;
+            cardFront = MagentaCardFront;
+            cardBack = MagentaCardBack;
+        }
+    }
 
     public void Flip()
     {
-        Sprite currentSprite = gameObject.GetComponent<Image>().sprite;
-
-        if (currentSprite == CardFront)
+        if(gameObject.GetComponent<Image>().sprite == cardFront)
         {
-            gameObject.GetComponent<Image>().sprite = CardBack;
-        } else {
-            gameObject.GetComponent<Image>().sprite = CardFront;
+            gameObject.GetComponent<Image>().sprite = cardBack;
+        }
+        else
+        {
+            gameObject.GetComponent<Image>().sprite = cardFront;
         }
     }
 }

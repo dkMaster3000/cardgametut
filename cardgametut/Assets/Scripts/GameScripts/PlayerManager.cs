@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using JetBrains.Annotations;
 
 public class PlayerManager : NetworkBehaviour
 {
+    public GameManager GameManager;
 
     public GameObject Ping;
 
@@ -38,6 +40,8 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         PlayerArea = GameObject.Find("PlayerArea");
         EnemyArea = GameObject.Find("EnemyArea");
@@ -90,6 +94,7 @@ public class PlayerManager : NetworkBehaviour
             NetworkServer.Spawn(card, connectionToClient);
             RpcShowCard(card, "Dealt");
         }
+        RpcGMChangeState("Compile {}");
     }
 
     public void PlayCard(GameObject card)
@@ -111,22 +116,82 @@ public class PlayerManager : NetworkBehaviour
             if (isOwned)
             {
                 card.transform.SetParent(PlayerArea.transform, false);
+                card.GetComponent<CardFlipper>().SetSprite("cyan");
             } else
             {
                 card.transform.SetParent(EnemyArea.transform, false);
+                card.GetComponent<CardFlipper>().SetSprite("magenta");
                 card.GetComponent<CardFlipper>().Flip();
             }
         }
         else if (type == "Played")
             {
-
-            card.transform.SetParent(PlayerSlot1.transform, false);
+            if(CardsPlayed == 5)
+            {
+                CardsPlayed = 0;
+            }
+            if (isOwned)
+            {
+                card.transform.SetParent(PlayerSockets[CardsPlayed].transform, false);
+                CmdGMCardPlayed();
+            }
+            
             if (!isOwned)
-                {
-                    card.GetComponent<CardFlipper>().Flip();
-                }
-              
+            {
+                card.transform.SetParent(EnemySockets[CardsPlayed].transform, false);
+                card.GetComponent<CardFlipper>().Flip();
+            }
+
+            CardsPlayed++;
+            PlayerManager pm = NetworkClient.connection.identity.GetComponent<PlayerManager>();
+            pm.IsMyTurn = !pm.IsMyTurn;
+
+
             }
         
+    }
+
+    [Command]
+    public void CmdGMChangeState(string stateRequest)
+    {
+        RpcGMChangeState(stateRequest);
+    }
+
+    [ClientRpc]
+    void RpcGMChangeState(string stateRequest)
+    {
+        GameManager.ChangeGameState(stateRequest);
+        if(stateRequest == "Compile {}")
+        {
+            GameManager.ChangeReadyClicks();
+        }
+    }
+
+    [Command]
+    void CmdGMCardPlayed()
+    {
+        RpcGMCardPlayed();
+    }
+
+    [ClientRpc]
+    void RpcGMCardPlayed()
+    {
+        GameManager.CardPlayed();
+    }
+
+    [Command]
+    public void CmdExecute()
+    {
+        RpcExecute();
+    }
+
+    [ClientRpc]
+    public void RpcExecute()
+    {
+        for(int i = 0; i < PlayerSockets.Count; i++)
+        {
+            PlayerSockets[i].transform.GetChild(0).gameObject.transform.SetParent(PlayerYard.transform, false);
+            EnemySockets[i].transform.GetChild(0).gameObject.transform.SetParent(EnemyYard.transform, false);
+        }
     }
 }

@@ -13,22 +13,49 @@ public class GameManager : NetworkBehaviour
     public int OpponentVariables = 0;
 
 
+    private int ReadyClicks = 0;
+
+
+
     void Start()
     {
-        
+       
     }
 
     public void ChangeGameState(string stateRequest)
     {
         if (stateRequest == "Initialize {}")
         {
+            ReadyClicks = 0;
+            GameState = "Initialize {}";
 
         } else if (stateRequest == "Compile {}")
         {
+            if(ReadyClicks == 1)
+            {
+                GameState = "Compile {}";
+            }
 
         }   else if (stateRequest == "Execute {}")
         {
-
+            GameState = "Execute {}";
+            TurnOrder = 0;
         }
     }
+
+    public void ChangeReadyClicks()
+    {
+        ReadyClicks++;
+    }
+
+    public void CardPlayed()
+    {
+        TurnOrder++;
+        if(TurnOrder == 10) 
+        {
+            ChangeGameState("Execute {}");
+        }
+    }
+
+
 }

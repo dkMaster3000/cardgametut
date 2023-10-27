@@ -17,8 +17,9 @@ public class CardZoom : MonoBehaviour
     {
         //Input.mousePosition.x, Input.mousePosition.y + 250
         //gameObject.transform.position.x, gameObject.transform.position.y + 280
-        zoomCard = Instantiate(gameObject, new Vector2(300, 500), Quaternion.identity);
-        zoomCard.transform.SetParent(Canvas.transform, false);
+        //300, 500
+        zoomCard = Instantiate(gameObject, new Vector2(Input.mousePosition.x, Input.mousePosition.y + 250), Quaternion.identity);
+        zoomCard.transform.SetParent(Canvas.transform, true);
         zoomCard.layer = LayerMask.NameToLayer("Zoom");
 
 

@@ -1765,6 +1765,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2360613906230371009, guid: 97d979ba84836f1428099767084e9e61, type: 3}
+      propertyPath: m_Spacing.x
+      value: -105
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360613906230371009, guid: 97d979ba84836f1428099767084e9e61, type: 3}
+      propertyPath: m_StartAxis
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360613906230371009, guid: 97d979ba84836f1428099767084e9e61, type: 3}
+      propertyPath: m_StartCorner
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360613906230371009, guid: 97d979ba84836f1428099767084e9e61, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7456035511720696791, guid: 97d979ba84836f1428099767084e9e61, type: 3}
       propertyPath: m_Name
       value: EnemyYard
