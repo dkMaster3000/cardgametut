@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class DrawCards : NetworkBehaviour
+public abstract class CardAbilities : NetworkBehaviour
 {
 
-    
-
     public PlayerManager PlayerManager;
-
-    public void OnClick() 
+    void Start()
     {
         NetworkIdentity networkIdentity = NetworkClient.connection.identity;
         PlayerManager = networkIdentity.GetComponent<PlayerManager>();
-        PlayerManager.CmdDealCards();
-        
     }
+
+    public abstract void OnCompile();
+
+    public abstract void OnExecute();
 }
