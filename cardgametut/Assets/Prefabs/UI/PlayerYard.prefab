@@ -229,7 +229,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f238b63c1d8ee834784fb1206716f383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   DisplayArea: {fileID: 0}
+  ZoomCard: {fileID: 3433467409199580519, guid: b10556ee4d4c823478ceb74f18ee6632, type: 3}
