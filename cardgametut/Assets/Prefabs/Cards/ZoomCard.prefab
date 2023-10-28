@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -2598797130210829340}
   - component: {fileID: 6158861651019000294}
   m_Layer: 6
-  m_Name: Ping
+  m_Name: ZoomCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   Canvas: {fileID: 0}
-  ZoomCard: {fileID: 3433467409199580519, guid: b10556ee4d4c823478ceb74f18ee6632, type: 3}
+  ZoomCard: {fileID: 3433467409199580519}
 --- !u!114 &8127759982619072448
 MonoBehaviour:
   m_ObjectHideFlags: 0

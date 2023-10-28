@@ -24,6 +24,8 @@ public class UIManager : NetworkBehaviour
 
     public void UpdatePlayerText()
     {
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         PlayerText.GetComponent<Text>().text = "Player BP: " + GameManager.PlayerBP + "\nPlayer Variable: " + GameManager.PlayerVariables;
         OpponentText.GetComponent<Text>().text = "Opponent BP: " + GameManager.OpponentBP + "\nOpponent Variable: " + GameManager.OpponentVariables;
     }

@@ -62,6 +62,7 @@ public class DragDrop : NetworkBehaviour
 
     public void StartDrag()
     {
+
         if (!isDraggable) return;
         startParent = transform.parent.gameObject;
         startPosition = transform.position;
@@ -72,7 +73,6 @@ public class DragDrop : NetworkBehaviour
     {
         if (!isDraggable) return;
         isDragging = false;
-
         if(isOverDropZone && PlayerManager.IsMyTurn)
         {
             transform.SetParent(dropZone.transform, false);
