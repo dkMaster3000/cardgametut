@@ -98,6 +98,7 @@ public class PlayerManager : NetworkBehaviour
 
     public void PlayCard(GameObject card)
     {
+        card.GetComponent<CardAbilities>().OnCompile();
         CmdPlayCard(card);
     }
 
@@ -189,8 +190,34 @@ public class PlayerManager : NetworkBehaviour
     {
         for(int i = 0; i < PlayerSockets.Count; i++)
         {
+            PlayerSockets[i].transform.GetComponentInChildren<CardAbilities>().OnExecute();
             PlayerSockets[i].transform.GetChild(0).gameObject.transform.SetParent(PlayerYard.transform, false);
             EnemySockets[i].transform.GetChild(0).gameObject.transform.SetParent(EnemyYard.transform, false);
         }
+    }
+
+    [Command]
+    public void CmdGMChangeVariables(int variables)
+    {
+        RpcGMChangeVariables(variables);
+    }
+
+    [ClientRpc]
+    public void RpcGMChangeVariables(int variables)
+    {
+        GameManager.ChangeVariables(variables, isOwned);
+    }
+
+
+    [Command]
+    public void CmdGMChangeBP(int playerBP, int opponentBP)
+    {
+        RpcGMChangeBP(playerBP, opponentBP);
+    }
+
+    [ClientRpc]
+    public void RpcGMChangeBP(int playerBP, int opponentBP)
+    {
+        GameManager.ChangeBP(playerBP, opponentBP, isOwned);
     }
 }

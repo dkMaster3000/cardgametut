@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Globalization;
+using Unity.VisualScripting;
 
 public class GameManager : NetworkBehaviour
 {
@@ -62,6 +64,37 @@ public class GameManager : NetworkBehaviour
         {
             ChangeGameState("Execute {}");
         }
+    }
+
+    public void ChangeBP(int playerBP, int opponentBP, bool isOwned)
+    {
+        if (isOwned)
+        {
+            PlayerBP += playerBP;
+            OpponentBP -= opponentBP;
+        } else
+        {
+            PlayerBP -= opponentBP;
+            OpponentBP += playerBP;
+        }
+
+        UIManager.UpdatePlayerText();
+
+    }
+
+
+    public void ChangeVariables(int variables, bool isOwned)
+    {
+        if (isOwned)
+        {
+            PlayerVariables += variables;
+        }
+        else
+        {
+            OpponentVariables += variables;
+        }
+
+        UIManager.UpdatePlayerText();
     }
 
 

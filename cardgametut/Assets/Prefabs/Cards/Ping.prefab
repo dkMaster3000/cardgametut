@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8127759982619072448}
   - component: {fileID: -2598797130210829340}
   - component: {fileID: 6158861651019000294}
+  - component: {fileID: 9076837451258798220}
   m_Layer: 6
   m_Name: Ping
   m_TagString: Untagged
@@ -347,3 +348,19 @@ MonoBehaviour:
   CyanCardBack: {fileID: 21300000, guid: 8a9b87930495a5c4e8b61ea242a135b9, type: 3}
   MagentaCardFront: {fileID: 21300000, guid: a82292ca71a4a4048bc66b2e85ef1d6a, type: 3}
   MagentaCardBack: {fileID: 21300000, guid: 8a9b87930495a5c4e8b61ea242a135b9, type: 3}
+--- !u!114 &9076837451258798220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433467409199580519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2a07e6796ab3a468ceafc958535907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  PlayerManager: {fileID: 0}
